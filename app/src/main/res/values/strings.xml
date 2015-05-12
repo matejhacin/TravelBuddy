@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">TravelBuddy</string>
+
+    <!-- Activity titles -->
+    <string name="title_activity_main">Travel Buddy</string>
+    <string name="title_activity_map_view">My Trip</string>
+    <string name="title_activity_add_destination">Add Destination</string>
+    <string name="title_activity_add_trip">Add Trip</string>
+    <string name="title_activity_destination_info">Destination Info</string>
+
 </resources>
