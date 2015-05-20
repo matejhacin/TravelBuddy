@@ -19,7 +19,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/title_activity_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,31 +28,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MapViewActivity"
+            android:name=".activities.MapViewActivity"
             android:label="@string/title_activity_map_view"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".activities.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.matejhacin.travelbuddy.MainActivity" />
+                android:value=".activities.MainActivity" />
         </activity>
         <activity
-            android:name=".AddDestinationActivity"
+            android:name=".activities.AddDestinationActivity"
             android:label="@string/title_activity_add_destination"
-            android:parentActivityName=".MapViewActivity" >
+            android:parentActivityName=".activities.MapViewActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.matejhacin.travelbuddy.MapViewActivity" />
+                android:value=".activities.MapViewActivity" />
         </activity>
         <activity
-            android:name=".AddTripActivity"
+            android:name=".activities.AddTripActivity"
             android:label="@string/title_activity_add_trip"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".activities.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.matejhacin.travelbuddy.MainActivity" />
+                android:value=".activities.MainActivity" />
         </activity>
         <activity
-            android:name=".DestinationInfoActivity"
+            android:name=".activities.DestinationInfoActivity"
             android:label="@string/title_activity_destination_info" >
         </activity>
         <meta-data
