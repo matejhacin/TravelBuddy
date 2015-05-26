@@ -6,23 +6,31 @@ public class Trip {
     Variables
      */
 
+    private int id;
     private String city;
     private String country;
-    private String date;
+    private String startDate;
+    private String endDate;
 
     /*
     Constructor
      */
 
-    public Trip (String city, String country, String date) {
+    public Trip (int id, String city, String country, String startDate, String endDate) {
+        this.id = id;
         this.city = city;
         this.country = country;
-        this.date = date;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     /*
     Getters
      */
+
+    public int getId(){
+        return id;
+    }
 
     public String getCity() {
         return city;
@@ -32,7 +40,15 @@ public class Trip {
         return country;
     }
 
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
     public String getDate() {
-        return date;
+        return startDate + "\n" + endDate;
     }
 }

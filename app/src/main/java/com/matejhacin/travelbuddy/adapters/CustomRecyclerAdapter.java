@@ -1,10 +1,13 @@
 package com.matejhacin.travelbuddy.adapters;
 
+import android.location.Location;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.matejhacin.travelbuddy.R;
 import com.matejhacin.travelbuddy.classes.Trip;
@@ -21,6 +24,7 @@ public class CustomRecyclerAdapter extends RecyclerView.Adapter<CustomRecyclerAd
         private final TextView cityTextView;
         private final TextView countryTextView;
         private final TextView dateTextView;
+        private Trip trip;
 
         public ViewHolder(View v) {
             super(v);
@@ -28,7 +32,7 @@ public class CustomRecyclerAdapter extends RecyclerView.Adapter<CustomRecyclerAd
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO something happens when clicked
+                    Log.i("TAG", trip.getCity());
                 }
             });
 
@@ -47,6 +51,10 @@ public class CustomRecyclerAdapter extends RecyclerView.Adapter<CustomRecyclerAd
 
         public TextView getDateTextView () {
             return dateTextView;
+        }
+
+        public void setTrip (Trip trip) {
+            this.trip = trip;
         }
     }
     /**
@@ -83,6 +91,7 @@ public class CustomRecyclerAdapter extends RecyclerView.Adapter<CustomRecyclerAd
         holder.getCityTextView().setText(tripArrayList.get(position).getCity());
         holder.getCountryTextView().setText(tripArrayList.get(position).getCountry());
         holder.getDateTextView().setText(tripArrayList.get(position).getDate());
+        holder.setTrip(tripArrayList.get(position));
     }
 
     @Override

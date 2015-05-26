@@ -50,10 +50,29 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         // Set listeners
         findViewById(R.id.floatingActionButton).setOnClickListener(this);
 
-        /*
+        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
+        tripArrayList.add(new Trip("Trbovlje", "UK", "Jan 12\nJan 18"));
+        tripArrayList.add(new Trip("Ljubljana", "UK", "Jan 12\nJan 18"));
+        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
+        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
+        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
+        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
+        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
+        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
+        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
+        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
+        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
+        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
+        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
+        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
+        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
+        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
+        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
+        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
+
         customRecyclerAdapter = new CustomRecyclerAdapter(tripArrayList);
         recyclerView.setAdapter(customRecyclerAdapter);
-        */
+
     }
 
     /*
