@@ -1,6 +1,10 @@
 package com.matejhacin.travelbuddy.classes;
 
-public class Trip {
+import android.support.annotation.Nullable;
+
+import java.io.Serializable;
+
+public class Trip implements Serializable {
 
     /*
     Variables
@@ -16,8 +20,17 @@ public class Trip {
     Constructor
      */
 
+    // With id (when reading from DB)
     public Trip (int id, String city, String country, String startDate, String endDate) {
         this.id = id;
+        this.city = city;
+        this.country = country;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
+    // Without id (when inserting to DB)
+    public Trip (String city, String country, String startDate, String endDate) {
         this.city = city;
         this.country = country;
         this.startDate = startDate;

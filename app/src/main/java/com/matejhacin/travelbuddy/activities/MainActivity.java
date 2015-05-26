@@ -1,6 +1,7 @@
 package com.matejhacin.travelbuddy.activities;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,8 @@ import android.view.View;
 import com.matejhacin.travelbuddy.R;
 import com.matejhacin.travelbuddy.adapters.CustomRecyclerAdapter;
 import com.matejhacin.travelbuddy.classes.Trip;
+import com.matejhacin.travelbuddy.database.DatabaseHandler;
+import com.matejhacin.travelbuddy.database.DatabaseManager;
 
 import java.util.ArrayList;
 
@@ -42,7 +45,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         // Initialize variables
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(getApplicationContext());
-        tripArrayList = new ArrayList<>();
 
         // Set up RecyclerView
         recyclerView.setLayoutManager(layoutManager);
@@ -50,29 +52,33 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         // Set listeners
         findViewById(R.id.floatingActionButton).setOnClickListener(this);
 
-        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
-        tripArrayList.add(new Trip("Trbovlje", "UK", "Jan 12\nJan 18"));
-        tripArrayList.add(new Trip("Ljubljana", "UK", "Jan 12\nJan 18"));
-        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
-        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
-        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
-        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
-        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
-        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
-        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
-        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
-        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
-        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
-        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
-        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
-        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
-        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
-        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
-        tripArrayList.add(new Trip("London", "UK", "Jan 12\nJan 18"));
+    }
 
-        customRecyclerAdapter = new CustomRecyclerAdapter(tripArrayList);
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Initialize arraylist
+        tripArrayList = new ArrayList<>();
+
+        // Get trips from DB and add them to arraylist
+        Cursor cursor = new DatabaseHandler(getApplicationContext()).getAllTrips();
+        if (cursor.moveToFirst()) {
+            do {
+                Trip trip = new Trip(
+                        cursor.getString(cursor.getColumnIndex(DatabaseManager.TRIP_CITY)),
+                        cursor.getString(cursor.getColumnIndex(DatabaseManager.TRIP_COUNTRY)),
+                        cursor.getString(cursor.getColumnIndex(DatabaseManager.TRIP_START_DATE)),
+                        cursor.getString(cursor.getColumnIndex(DatabaseManager.TRIP_END_DATE))
+                );
+                tripArrayList.add(trip);
+            } while (cursor.moveToNext());
+        }
+
+        // Populate/update RecyclerView
+        customRecyclerAdapter = new CustomRecyclerAdapter(getApplicationContext(), tripArrayList);
         recyclerView.setAdapter(customRecyclerAdapter);
-
+        customRecyclerAdapter.notifyDataSetChanged();
     }
 
     /*

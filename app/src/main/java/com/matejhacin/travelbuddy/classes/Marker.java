@@ -2,7 +2,9 @@ package com.matejhacin.travelbuddy.classes;
 
 import com.google.android.gms.maps.model.LatLng;
 
-public class Marker {
+import java.io.Serializable;
+
+public class Marker implements Serializable {
 
     /*
     Variables
@@ -21,8 +23,20 @@ public class Marker {
     Constructor
      */
 
+    // With id - when reading from DB
     public Marker(int id, int t_id, String title, String address, String info, double latitude, double longitude, int status) {
         this.id = id;
+        this.t_id = t_id;
+        this.title = title;
+        this.address = address;
+        this.info = info;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.status = status;
+    }
+
+    // Without id - when inserting to DB
+    public Marker(int t_id, String title, String address, String info, double latitude, double longitude, int status) {
         this.t_id = t_id;
         this.title = title;
         this.address = address;
