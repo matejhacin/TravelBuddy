@@ -4,4 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.matejhacin.travelbuddy.activities.MapViewActivity">
 
+    <item
+        android:id="@+id/addMarkerAction"
+        android:icon="@drawable/add_marker_icon"
+        app:showAsAction="always"
+        android:orderInCategory="100" />
+
 </menu>
