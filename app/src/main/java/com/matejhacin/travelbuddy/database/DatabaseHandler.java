@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.matejhacin.travelbuddy.classes.Marker;
+import com.matejhacin.travelbuddy.classes.DestinationMarker;
 import com.matejhacin.travelbuddy.classes.Trip;
 
 public class DatabaseHandler {
@@ -52,15 +52,15 @@ public class DatabaseHandler {
         return (int) sqLiteDatabase.insert(DatabaseManager.TRIP_TABLE_NAME, null, cv);
     }
 
-    public int addMarker(Marker marker) {
+    public int addMarker(DestinationMarker destinationMarker) {
         ContentValues cv = new ContentValues();
-        cv.put(DatabaseManager.MARKER_TRIP_ID, marker.getT_id());
-        cv.put(DatabaseManager.MARKER_TITLE, marker.getTitle());
-        cv.put(DatabaseManager.MARKER_ADDRESS, marker.getAddress());
-        cv.put(DatabaseManager.MARKER_INFO, marker.getInfo());
-        cv.put(DatabaseManager.MARKER_LAT, marker.getLatitude());
-        cv.put(DatabaseManager.MARKER_LONG, marker.getLongitude());
-        cv.put(DatabaseManager.MARKER_STATUS, marker.getStatus());
+        cv.put(DatabaseManager.MARKER_TRIP_ID, destinationMarker.getT_id());
+        cv.put(DatabaseManager.MARKER_TITLE, destinationMarker.getTitle());
+        cv.put(DatabaseManager.MARKER_ADDRESS, destinationMarker.getAddress());
+        cv.put(DatabaseManager.MARKER_INFO, destinationMarker.getInfo());
+        cv.put(DatabaseManager.MARKER_LAT, destinationMarker.getLatitude());
+        cv.put(DatabaseManager.MARKER_LONG, destinationMarker.getLongitude());
+        cv.put(DatabaseManager.MARKER_STATUS, destinationMarker.getStatus());
 
         open();
         return (int) sqLiteDatabase.insert(DatabaseManager.MARKER_TABLE_NAME, null, cv);
@@ -87,10 +87,10 @@ public class DatabaseHandler {
      * MODIFYING
      */
 
-    public void setMarkerDone(Marker marker) {
+    public void setMarkerDone(DestinationMarker destinationMarker) {
         String query = "UPDATE " + DatabaseManager.MARKER_TABLE_NAME
                 + " SET " + DatabaseManager.MARKER_STATUS + " = " + DatabaseManager.MARKER_STATUS_INACTIVE
-                + " WHERE " + DatabaseManager.MARKER_ID + " = " + marker.getId() + ";";
+                + " WHERE " + DatabaseManager.MARKER_ID + " = " + destinationMarker.getId() + ";";
         open();
         sqLiteDatabase.rawQuery(query, null);
     }

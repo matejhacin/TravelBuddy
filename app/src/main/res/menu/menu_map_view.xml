@@ -8,6 +8,7 @@
         android:id="@+id/addMarkerAction"
         android:icon="@drawable/add_marker_icon"
         app:showAsAction="always"
-        android:orderInCategory="100" />
+        android:orderInCategory="100"
+        android:title="@string/add_marker_action"/>
 
 </menu>

@@ -41,7 +41,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
             + TRIP_START_DATE + " TEXT, "
             + TRIP_END_DATE + " TEXT);";
 
-    // Marker table
+    // DestinationMarker table
     public static String MARKER_TABLE_NAME = "marker";
     public static String MARKER_ID = "id";
     public static String MARKER_TRIP_ID = "t_id";
