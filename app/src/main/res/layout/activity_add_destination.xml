@@ -57,6 +57,7 @@
                     android:layout_weight="1"
                     android:singleLine="true"
                     android:hint="@string/latitude"
+                    android:inputType="numberDecimal"
                     app:met_maxCharacters="10"
                     app:met_minCharacters="8"
                     app:met_floatingLabel="highlight" />
@@ -69,6 +70,7 @@
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:singleLine="true"
                     android:hint="@string/longitude"
+                    android:inputType="numberDecimal"
                     app:met_maxCharacters="10"
                     app:met_minCharacters="8"
                     app:met_floatingLabel="highlight" />
@@ -80,14 +82,14 @@
                 android:layout_height="match_parent">
 
                 <Button
-                    android:id="@+id/addTripButton"
+                    android:id="@+id/addDestinationButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:text="@string/add_trip" />
+                    android:text="@string/add_destination" />
 
             </FrameLayout>
-    
+
         </LinearLayout>
 
     </ScrollView>

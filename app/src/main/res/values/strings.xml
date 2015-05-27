@@ -25,5 +25,6 @@
     <string name="info_hint">Additional info\nThis can be as long as you want!\nEnter important additional information\nabout your destination here!</string>
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
+    <string name="add_destination">Add destination</string>
 
 </resources>
