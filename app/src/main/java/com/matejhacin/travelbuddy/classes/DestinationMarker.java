@@ -85,4 +85,8 @@ public class DestinationMarker implements Serializable {
     public int getStatus() {
         return status;
     }
+
+    public boolean isActive() {
+        return status == 1;
+    }
 }

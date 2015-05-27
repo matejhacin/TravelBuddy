@@ -44,9 +44,11 @@ public class DestinationInfoActivity extends ActionBarActivity implements View.O
         findViewById(R.id.markDoneButton).setOnClickListener(this);
 
         // Set text
-        getSupportActionBar().setTitle(destinationMarker.getTitle());
-        addressTextView.setText(destinationMarker.getAddress());
-        infoTextView.setText(destinationMarker.getInfo());
+        if (destinationMarker != null) {
+            getSupportActionBar().setTitle(destinationMarker.getTitle());
+            addressTextView.setText(destinationMarker.getAddress());
+            infoTextView.setText(destinationMarker.getInfo());
+        }
     }
 
     /*

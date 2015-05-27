@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.matejhacin.travelbuddy.classes.DestinationMarker;
 import com.matejhacin.travelbuddy.classes.Trip;
@@ -31,10 +32,6 @@ public class DatabaseHandler {
 
     private void open() {
         sqLiteDatabase = dbManager.getWritableDatabase();
-    }
-
-    private void close() {
-        if (sqLiteDatabase != null) sqLiteDatabase.close();
     }
 
     /**
@@ -91,7 +88,8 @@ public class DatabaseHandler {
         String query = "UPDATE " + DatabaseManager.MARKER_TABLE_NAME
                 + " SET " + DatabaseManager.MARKER_STATUS + " = " + DatabaseManager.MARKER_STATUS_INACTIVE
                 + " WHERE " + DatabaseManager.MARKER_ID + " = " + destinationMarker.getId() + ";";
+        Log.i("TAG", query);
         open();
-        sqLiteDatabase.rawQuery(query, null);
+        sqLiteDatabase.execSQL(query);
     }
 }

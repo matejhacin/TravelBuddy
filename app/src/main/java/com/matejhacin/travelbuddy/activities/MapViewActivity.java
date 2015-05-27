@@ -4,12 +4,15 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.matejhacin.travelbuddy.R;
@@ -43,14 +46,10 @@ public class MapViewActivity extends ActionBarActivity implements OnMapReadyCall
 
         // Initialize variables
         trip = (Trip) getIntent().getExtras().get("trip");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
 
         // Initialize variables
         markerOptionsHashMap = new HashMap<>();
+        markerHashMap = new HashMap<>();
 
         // Get all markers from DB
         Cursor cursor = new DatabaseHandler(getApplicationContext()).getAllMarkers(trip);
@@ -66,7 +65,13 @@ public class MapViewActivity extends ActionBarActivity implements OnMapReadyCall
                         cursor.getDouble(cursor.getColumnIndex(DatabaseManager.MARKER_LONG)),
                         cursor.getInt(cursor.getColumnIndex(DatabaseManager.MARKER_STATUS))
                 );
-                MarkerOptions markerOptions = new MarkerOptions().position(destinationMarker.getLatLng()).title(destinationMarker.getTitle());
+                MarkerOptions markerOptions = new MarkerOptions()
+                        .position(destinationMarker.getLatLng())
+                        .title(destinationMarker.getTitle());
+                // Set marker color according to status
+                Log.i("TAG", "Marker status: " + destinationMarker.getStatus());
+                if (destinationMarker.isActive()) markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_pink));
+                else markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_green));
                 // Add both to HashMap
                 markerOptionsHashMap.put(markerOptions, destinationMarker);
             } while (cursor.moveToNext());
@@ -75,6 +80,18 @@ public class MapViewActivity extends ActionBarActivity implements OnMapReadyCall
         // Get map
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        // Completely restart the activity whenever it was paused just to make sure all markers are refreshed
+        Intent intent = new Intent(MapViewActivity.this, MapViewActivity.class);
+        intent.putExtra("trip", trip);
+        startActivity(intent);
+        overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
+        finish();
     }
 
     /*
@@ -108,8 +125,6 @@ public class MapViewActivity extends ActionBarActivity implements OnMapReadyCall
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        // Initialize HashMap
-        markerHashMap = new HashMap<>();
         // Add all markers to map
         for (MarkerOptions markerOptions : markerOptionsHashMap.keySet()) {
             // Create marker and add it to new HashMap with markers
