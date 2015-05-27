@@ -20,7 +20,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".activities.MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,7 +31,8 @@
         <activity
             android:name=".activities.MapViewActivity"
             android:label="@string/title_activity_map_view"
-            android:parentActivityName=".activities.MainActivity" >
+            android:parentActivityName=".activities.MainActivity"
+            android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />
@@ -38,15 +40,15 @@
         <activity
             android:name=".activities.AddDestinationActivity"
             android:label="@string/title_activity_add_destination"
-            android:parentActivityName=".activities.MapViewActivity" >
+            android:parentActivityName=".activities.MapViewActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.MapViewActivity" />
+                android:value=".activities.MapViewActivity"/>
         </activity>
         <activity
             android:name=".activities.AddTripActivity"
             android:label="@string/title_activity_add_trip"
-            android:parentActivityName=".activities.MainActivity" >
+            android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.MainActivity" />

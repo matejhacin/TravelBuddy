@@ -19,5 +19,11 @@
 
     <!-- Destination -->
     <string name="add_marker_action">Add marker</string>
+    <string name="title">Title</string>
+    <string name="address">Address</string>
+    <string name="info">Additional info</string>
+    <string name="info_hint">Additional info\nThis can be as long as you want!\nEnter important additional information\nabout your destination here!</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
 
 </resources>
