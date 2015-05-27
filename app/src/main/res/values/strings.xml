@@ -26,5 +26,6 @@
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
     <string name="add_destination">Add destination</string>
+    <string name="mark_done">Mark as done</string>
 
 </resources>
