@@ -22,14 +22,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-public class MapViewActivity extends ActionBarActivity implements OnMapReadyCallback {
+public class MapViewActivity extends ActionBarActivity implements OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
 
     /*
     Variables
      */
 
     private Trip trip;
-    private HashMap<MarkerOptions, DestinationMarker> markerHashMap;
+    private HashMap<MarkerOptions, DestinationMarker> markerOptionsHashMap;
+    private HashMap<Marker, DestinationMarker> markerHashMap;
 
     /*
     Lifecycle
@@ -49,7 +50,7 @@ public class MapViewActivity extends ActionBarActivity implements OnMapReadyCall
         super.onResume();
 
         // Initialize variables
-        markerHashMap = new HashMap<>();
+        markerOptionsHashMap = new HashMap<>();
 
         // Get all markers from DB
         Cursor cursor = new DatabaseHandler(getApplicationContext()).getAllMarkers(trip);
@@ -67,7 +68,7 @@ public class MapViewActivity extends ActionBarActivity implements OnMapReadyCall
                 );
                 MarkerOptions markerOptions = new MarkerOptions().position(destinationMarker.getLatLng()).title(destinationMarker.getTitle());
                 // Add both to HashMap
-                markerHashMap.put(markerOptions, destinationMarker);
+                markerOptionsHashMap.put(markerOptions, destinationMarker);
             } while (cursor.moveToNext());
         }
 
@@ -107,9 +108,23 @@ public class MapViewActivity extends ActionBarActivity implements OnMapReadyCall
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        // Initialize HashMap
+        markerHashMap = new HashMap<>();
         // Add all markers to map
-        for (MarkerOptions markerOptions : markerHashMap.keySet()) {
-            googleMap.addMarker(markerOptions);
+        for (MarkerOptions markerOptions : markerOptionsHashMap.keySet()) {
+            // Create marker and add it to new HashMap with markers
+            Marker marker = googleMap.addMarker(markerOptions);
+            markerHashMap.put(marker, markerOptionsHashMap.get(markerOptions));
         }
+        // Set marker click listener
+        googleMap.setOnInfoWindowClickListener(this);
+    }
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        Intent intent = new Intent(MapViewActivity.this, DestinationInfoActivity.class);
+        intent.putExtra("marker", markerHashMap.get(marker));
+        startActivity(intent);
+        overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
     }
 }
